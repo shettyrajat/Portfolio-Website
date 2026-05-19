@@ -11,23 +11,67 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 
-const textureLoader = new THREE.TextureLoader();
-const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+const skills = [
+  { name: "Embedded\nComputing",   color: "#009688" },
+  { name: "Edge AI",              color: "#7B2FBE" },
+  { name: "Industrial AI",        color: "#673AB7" },
+  { name: "NVIDIA Jetson",        color: "#76B900" },
+  { name: "Embedded Linux",       color: "#F7C400" },
+  { name: "BIOS/Firmware",        color: "#795548" },
+  { name: "System\nIntegration",  color: "#00897B" },
+  { name: "Python",               color: "#3776AB" },
+  { name: "C / C++",              color: "#00599C" },
+  { name: "RAG",                  color: "#FF6B35" },
+  { name: "LLM",                  color: "#E91E8C" },
+  { name: "ChromaDB",             color: "#E91E63" },
+  { name: "Ollama",               color: "#444444" },
+  { name: "Flask",                color: "#555555" },
+  { name: "OpenVINO",             color: "#0071C5" },
+  { name: "Qt",                   color: "#41CD52" },
+  { name: "Technical\nPre-Sales", color: "#9C27B0" },
+  { name: "RFQ Support",          color: "#E53935" },
+  { name: "Solution\nConsulting", color: "#1565C0" },
+  { name: "Product Demos",        color: "#F57C00" },
+  { name: "PoC\nDevelopment",     color: "#2E7D32" },
+  { name: "Technical\nPresentations", color: "#6A1B9A" },
+  { name: "Customer\nEnablement", color: "#00838F" },
+  { name: "Agile/Scrum",          color: "#1976D2" },
+  { name: "Jira",                 color: "#0052CC" },
+  { name: "Salesforce",           color: "#00A1E0" },
 ];
-const textures = imageUrls.map((url) => textureLoader.load(url));
 
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
+function makeTextTexture(name: string, textColor: string): THREE.Texture {
+  const size = 512;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d")!;
 
-const spheres = [...Array(30)].map(() => ({
-  scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
+  // Solid white background
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0, 0, size, size);
+
+  // Colored text
+  ctx.fillStyle = textColor;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  const lines = name.split("\n");
+  const fontSize = lines.some(l => l.length > 9) ? 50 : lines.length > 1 ? 56 : 68;
+  ctx.font = `bold ${fontSize}px Arial, sans-serif`;
+  const lineHeight = fontSize * 1.25;
+  const startY = size / 2 - ((lines.length - 1) * lineHeight) / 2;
+  lines.forEach((line, i) => {
+    ctx.fillText(line, size / 2, startY + i * lineHeight);
+  });
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+
+const spheres = [...Array(skills.length)].map(() => ({
+  scale: [0.9, 1.1, 1, 1.05, 0.95][Math.floor(Math.random() * 5)],
 }));
 
 type SphereProps = {
@@ -60,7 +104,6 @@ function SphereGeo({
           -50 * delta * scale
         )
       );
-
     api.current?.applyImpulse(impulse, true);
   });
 
@@ -151,24 +194,31 @@ const TechStack = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   const materials = useMemo(() => {
-    return textures.map(
-      (texture) =>
-        new THREE.MeshPhysicalMaterial({
-          map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
-        })
-    );
+    return skills.map(({ name, color }) => {
+      const texture = makeTextTexture(name, color);
+      texture.needsUpdate = true;
+      return new THREE.MeshPhysicalMaterial({
+        map: texture,
+        transparent: false,
+        metalness: 0.0,
+        roughness: 0.1,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.05,
+        reflectivity: 1.0,
+        iridescence: 0.5,
+        iridescenceIOR: 1.5,
+        iridescenceThicknessRange: [100, 400],
+        sheen: 0.2,
+        sheenColor: new THREE.Color("#ffccee"),
+      });
+    });
   }, []);
 
   return (
-    <div className="techstack">
-      <h2> My Techstack</h2>
+    <div className="techstack" id="techstack">
+      <h2>Skills &amp; Technologies</h2>
 
       <Canvas
         shadows
@@ -193,7 +243,7 @@ const TechStack = () => {
             <SphereGeo
               key={i}
               {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
+              material={materials[i % materials.length]}
               isActive={isActive}
             />
           ))}

@@ -9,6 +9,8 @@
   width: var(--cWidth);
   max-width: 1920px;
   margin: auto;
+  margin-top: 100px;
+  margin-bottom: 200px;
   z-index: 9;
 }
 .what-box {
@@ -34,7 +36,7 @@
 }
 .what-box-in {
   flex-direction: column;
-  height: 500px;
+  height: 800px;
   margin-left: 200px;
   position: relative;
   display: none;
@@ -42,7 +44,7 @@
 .what-content {
   width: 450px;
   height: 33%;
-  min-height: 50%;
+  min-height: 33.33%;
   transition: 0.5s;
   /* border: 0.5px dashed rgba(255, 255, 255, 0.3); */
   position: relative;
@@ -52,23 +54,23 @@
 
 .what-noTouch:hover,
 .what-content-active {
-  min-height: 67%;
+  min-height: 50%;
   padding: 40px 50px;
 }
 
 .what-noTouch:hover ~ .what-content,
 .what-box-in:hover .what-noTouch:not(:hover),
 .what-content.what-sibling {
-  min-height: 33%;
+  min-height: 25%;
   padding: 10px 50px;
 }
 .what-content h3 {
-  font-size: 35px;
+  font-size: 26px;
   letter-spacing: 1px;
   margin: 0;
 }
 .what-content p {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 18px;
   font-weight: 200;
   letter-spacing: 0.7px;
@@ -249,17 +251,17 @@
     margin-right: 20%;
   }
   .what-box-in {
-    height: 400px;
+    height: 700px;
   }
   .what-content h3 {
-    font-size: 28px;
+    font-size: 22px;
   }
   .what-content {
     padding: 30px;
     width: 400px;
   }
   .what-content p {
-    font-size: 13px;
+    font-size: 12px;
   }
   .what-noTouch:hover,
   .what-content-active {
@@ -290,7 +292,7 @@
     padding-bottom: 50px;
   }
   .what-box-in {
-    height: 500px;
+    height: 800px;
     margin-left: -50px;
   }
   .what-content {
@@ -298,18 +300,18 @@
     width: 500px;
   }
   .what-content p {
-    font-size: 14px;
+    font-size: 12px;
   }
   .what-noTouch:hover,
   .what-content-active {
-    min-height: 67%;
+    min-height: 50%;
     padding: 50px;
   }
 
   .what-noTouch:hover ~ .what-content,
   .what-box-in:hover .what-noTouch:not(:hover),
   .what-content.what-sibling {
-    min-height: 33%;
+    min-height: 25%;
     padding: 10px 50px;
   }
 }
@@ -326,7 +328,7 @@
     justify-content: left;
   }
   .what-box:last-child {
-    height: 500px;
+    height: 800px;
   }
   .what-box {
     width: 500px;
@@ -338,7 +340,7 @@
   }
   .what-box-in {
     margin-left: 0px;
-    height: 450px;
+    height: 750px;
   }
   .what-content h5,
   .what-content-flex {
@@ -371,7 +373,7 @@
     padding: 5px 30px;
   }
   .what-content h3 {
-    font-size: 25px;
+    font-size: 20px;
   }
 }
 @media only screen and (max-width: 550px) {

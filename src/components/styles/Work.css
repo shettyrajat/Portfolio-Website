@@ -72,15 +72,26 @@
 }
 
 .work-info h4 {
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 500;
   margin: 0;
+  line-height: 20px;
+}
+.work-subtitle {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: var(--accentColor) !important;
+  opacity: 0.85;
+  margin: 3px 0 6px 0 !important;
+  letter-spacing: 0.3px;
 }
 .work-info p {
+  font-size: 12px;
   font-weight: 200;
   color: #adacac;
   margin: 0;
   margin-top: 3px;
+  line-height: 18px;
 }
 .work-info > p {
   width: 90%;

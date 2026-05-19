@@ -8,8 +8,8 @@ const About = () => {
         <p className="para">
           I am a customer-focused technical professional with experience in technical pre-sales, solution consulting, product demonstrations, and customer success across EMEA.
         </p>
-        <p className="para">
-          I bridge engineering and business by turning technical requirements into practical solutions that support customer adoption and business growth.
+        <p className="para" style={{ textWrap: "pretty" }}>
+          I bridge engineering and business by turning technical requirements into practical solutions that support customer&nbsp;adoption and business growth.
         </p>
         <p className="para">
           My background includes embedded computing, Edge AI, BIOS/firmware coordination, system integration, RFQ support, PoCs, and cross-functional collaboration with sales, product management, and engineering teams.
